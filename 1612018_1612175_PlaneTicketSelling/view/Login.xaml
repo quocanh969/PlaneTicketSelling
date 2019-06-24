@@ -1,0 +1,69 @@
+﻿<Window x:Class="_1612018_1612175_PlaneTicketSelling.view.Login"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:_1612018_1612175_PlaneTicketSelling.view"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"        
+        Title="Plane Ticket Selling" Height="500" Width="700" WindowStartupLocation="CenterScreen" Icon="img/Icon/logo.png">
+    <Window.Background>
+        <ImageBrush ImageSource="img/background/airplane-plane-flight-900.jpg"/>
+    </Window.Background>
+    <Grid>
+        <!--Login form-->
+        <Canvas Margin="378,0,-0.4,0.4">
+            <!-- Login form -->
+            <Grid Canvas.Top="50" Canvas.Left="40">
+                <Border BorderThickness="2"                    
+                        VerticalAlignment="Center" HorizontalAlignment="Center"
+                        Padding="0" Background="White"
+                        CornerRadius="20">
+                    <Border.BorderBrush>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FF310B97" Offset="0.011"/>
+                            <GradientStop Color="#FFF8F9F9" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.BorderBrush>
+                    <WrapPanel x:Name="Login_panel"  Orientation="Vertical" Background="White"
+                               Margin="20">
+                        <!--icon-->
+                        <Border BorderThickness="1"                                
+                                VerticalAlignment="Center" HorizontalAlignment="Center"
+                                Padding="0" Margin="0,30,0,0"
+                                CornerRadius="50">
+                            <Border.BorderBrush>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <GradientStop Color="#FF310B97" Offset="0.011"/>
+                                    <GradientStop Color="#FFF8F9F9" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Border.BorderBrush>
+                            <materialDesign:PackIcon Kind="User"
+                                                 Width="100" Height="100">
+                                <materialDesign:PackIcon.Foreground>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="#FF310B97" Offset="0.011"/>
+                                        <GradientStop Color="#FFF8F9F9" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </materialDesign:PackIcon.Foreground>
+                            </materialDesign:PackIcon>
+                        </Border>
+                        <!--username-->
+                        <TextBox x:Name="txtBox_UserName" Margin="0,30,0,0" KeyDown="keyPress" GotKeyboardFocus="isFocusing"
+                                materialDesign:HintAssist.Hint="Username"
+                                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                Width="200" FontSize="15"/>
+                        <PasswordBox x:Name="passBox_Password" KeyDown="keyPress" GotKeyboardFocus="isFocusing"                    
+                                    materialDesign:HintAssist.Hint="Password" Margin="0,10,0,0"
+                                    Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
+                             Width="200" FontSize="15"/>
+                        <TextBlock x:Name="txtBox_notice" FontSize="15" Foreground="Red" HorizontalAlignment="Right"                                   
+                                   Visibility="Hidden"/>
+                        <Button x:Name="btnLogin" Margin="10" Click="BtnLogin_Click"
+                                FontWeight="Bold" Background="OrangeRed" Foreground="White">LOGIN</Button>
+                    </WrapPanel>
+                </Border>
+            </Grid>
+        </Canvas>
+    </Grid>
+</Window>

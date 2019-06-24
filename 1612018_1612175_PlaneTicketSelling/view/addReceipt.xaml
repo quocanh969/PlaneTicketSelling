@@ -1,0 +1,251 @@
+﻿<UserControl x:Class="_1612018_1612175_PlaneTicketSelling.view.addReceipt"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:_1612018_1612175_PlaneTicketSelling.view"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" Background="White" IsVisibleChanged="UserControl_IsVisibleChanged"
+             d:DesignHeight="630" d:DesignWidth="1040"
+             xmlns:myUC="clr-namespace:_1612018_1612175_PlaneTicketSelling.view">
+    <Grid>
+        <Grid>
+                <Label FontFamily="Times New Roman" FontWeight="Bold" FontSize="34"
+                    VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,10,0,0">HÓA ĐƠN
+                </Label>
+                <Button HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" 
+                        Width="60" Height="60" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                        Background="Transparent" BorderThickness="0" Click="backBtnClick">
+                    <materialDesign:PackIcon Kind="ArrowBack" Width="40" Height="40" VerticalAlignment="Center" HorizontalAlignment="Center" ></materialDesign:PackIcon>
+                </Button>
+
+            <Border BorderBrush="Black" BorderThickness="2"
+                    CornerRadius="20"
+                    Margin="20,65,20,10">
+                <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <!--Khung tìm kiếm-->
+                <StackPanel x:Name="searchPanel" Orientation="Horizontal" Grid.Row="0" Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            HorizontalAlignment="Stretch">
+                    <materialDesign:PackIcon Kind="Search" Foreground="Black" 
+                                                    VerticalAlignment="Center" Margin="20,0,0,0"
+                                                    Width="50" Height="50"></materialDesign:PackIcon>
+                    <TextBox VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="20,0,20,0"
+                            x:Name="txtSearchBox" Width="300" FontSize="24"                            
+                            materialDesign:HintAssist.Hint="Tìm kiếm khách hàng"/>
+                    
+                    <Button x:Name="btnSearch" Background="OrangeRed"
+                            Margin="0,20" Click="BtnSearch_Click"
+                            Style="{StaticResource MaterialDesignRaisedButton}"
+                            Width="Auto" Height="Auto" FontSize="20" Foreground="White"
+                            ToolTip="Resource name: MaterialDesignRaisedButton">                        
+                        Search
+                    </Button>
+                </StackPanel>
+
+                    <!--CMND id của khách hàng-->
+                <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch">
+                    <materialDesign:PackIcon Kind="Passport" Foreground="Black"
+                                                     VerticalAlignment="Center" Margin="20,0,0,0"
+                                                     Width="50" Height="50"></materialDesign:PackIcon>
+                        <ComboBox x:Name="cmbKH" materialDesign:HintAssist.Hint="ID khách hàng..."                                   
+                              FontSize="25"  Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                              VerticalAlignment="Center" Width="300" Margin="20,0,20,0" SelectionChanged="CmbKH_SelectionChanged">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding ID}"/>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <Button x:Name="btnAddGuest" Click="BtnAddGuest_Click"
+                                Style="{StaticResource MaterialDesignRaisedButton}"
+                                ToolTip="Resource name: MaterialDesignRaisedButton"
+                                Background="#7158e2" Width="50" Height="50"
+                                Margin="20,0,0,0"
+                                VerticalAlignment="Center" HorizontalAlignment="Right"
+                                HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                        <DockPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Canvas Width="30" Height="30" HorizontalAlignment="Center">
+                                <materialDesign:PackIcon Kind="Add" Foreground="White" Height="30" Width="30"/>
+                            </Canvas>
+                        </DockPanel>
+                    </Button>
+                </StackPanel>
+
+                    
+                    
+                <!--Tên khách hàng-->
+                <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch">
+                    <materialDesign:PackIcon Kind="User" Foreground="Black" 
+                                                     VerticalAlignment="Center" Margin="20,0,0,0"
+                                                     Width="50" Height="50"></materialDesign:PackIcon>
+                    <TextBox VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="20,0,20,0"
+                              x:Name="txtTenKH" Width="350" FontSize="24"
+                             IsEnabled="False"
+                              materialDesign:HintAssist.Hint="Tên khách hàng ..."/>
+
+                </StackPanel>
+
+                <!--Số điện thoại-->
+                <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Stretch">
+                    <materialDesign:PackIcon Kind="Phone" Foreground="Black" 
+                                                     VerticalAlignment="Center" Margin="20,0,0,0"
+                                                     Width="50" Height="50"></materialDesign:PackIcon>
+                    <TextBox VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="20,0,20,0"
+                              x:Name="txtDialNumber2" Width="350" FontSize="24"
+                             IsEnabled="False"
+                              materialDesign:HintAssist.Hint="Số điện thoại...">
+                        <TextBox.Text>
+                            <Binding Path="Name" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                </StackPanel>
+
+                <!--Mã chuyến bay-->
+                <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            HorizontalAlignment="Stretch">
+                    <materialDesign:PackIcon Kind="AirplaneTakeoff" Foreground="Black" 
+                                                     VerticalAlignment="Center" Margin="20,0,0,0"
+                                                     Width="50" Height="50"></materialDesign:PackIcon>
+                    <ComboBox x:Name="cmbMaCB" materialDesign:HintAssist.Hint="Chuyến bay - Ngày bay..." 
+                              FontSize="25" Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                              VerticalAlignment="Center" Width="850" Margin="20,0,20,0">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock>
+                                        <TextBlock Text="{Binding MaCB}"/>                                        
+                                        -
+                                        <TextBlock Text="{Binding NgayDi, StringFormat=\{0:dd/MM/yyyy\}}"/>
+                                     </TextBlock>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                </StackPanel>
+
+                <!--Ngày mua-->
+                <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Stretch">
+                    <Label FontWeight="Bold" VerticalAlignment="Center" Margin="20,0,0,0"
+                           FontSize="25"
+                           Content="Ngày mua:"/>
+                    <DatePicker x:Name="dpNgayMua" VerticalAlignment="Center" Margin="25,0,20,10"
+                            Width="250"
+                            materialDesign:HintAssist.Hint=""
+                            Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                    </StackPanel>
+
+                <!--Số ghế thường-->
+                <StackPanel Orientation="Horizontal"
+                            Grid.Row="4" Grid.Column="0" VerticalAlignment="Center">
+                    <Label FontSize="20" Margin="20,0,0,0" FontWeight="Bold" Content="Số ghế thường:"/>
+                    <TextBox x:Name="txtNormalSeats" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="10,0,20,0"
+                              Width="250" FontSize="24"/>
+                </StackPanel>
+
+                <!--Số ghế VIP-->
+                <StackPanel Orientation="Horizontal"
+                            Grid.Row="5" Grid.Column="0" VerticalAlignment="Center">
+                    <Label FontSize="20" Margin="20,0,0,0" FontWeight="Bold" Content="Số ghế VIP:"/>
+                    <TextBox x:Name="txtVIPSeats" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="47,0,20,0"
+                              Width="250" FontSize="24"/>
+                </StackPanel>
+
+
+                <!--Tổng tiền-->
+                <StackPanel Orientation="Horizontal"
+                            Grid.Row="4" Grid.Column="1" VerticalAlignment="Center">
+                    <Label Margin="20,0,20,0" FontWeight="Bold" FontSize="25">Tổng tiền:</Label>
+                    <Border BorderThickness="2" BorderBrush="Black" Background="LightGray" Width="100">
+                        <TextBlock x:Name="txtTongTien" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                FontSize="20"
+                                IsEnabled="False" Margin="10,0,0,0"/>
+                    </Border>                    
+                    <Button x:Name="btnTinhTien" Click="BtnTinhTien_Click"
+                            Style="{StaticResource MaterialDesignRaisedButton}"
+                            ToolTip="Resource name: MaterialDesignRaisedButton"
+                            Background="#7158e2" Width="50" Height="50"
+                            Margin="20,0,0,0"
+                            VerticalAlignment="Center" HorizontalAlignment="Right"
+                            HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                        <DockPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Canvas Width="30" Height="30" HorizontalAlignment="Center">
+                                <materialDesign:PackIcon Kind="CurrencyUsd" Foreground="White" Height="30" Width="30"/>
+                            </Canvas>
+                        </DockPanel>
+                    </Button>
+                </StackPanel>
+
+                <!--Màn che-->                    
+                <Rectangle x:Name="ManChe" Fill="Transparent" Visibility="Hidden"
+                           Grid.ColumnSpan="2" Grid.RowSpan="5"/>
+                <Rectangle x:Name="ManChe_2" 
+                           Grid.Row="5"
+                           Fill="Transparent" Visibility="Hidden"/>
+                
+            <Grid x:Name="addComboBtn" Grid.Row="5" Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="btnXoa" Grid.Column="0"
+                        Style="{StaticResource MaterialDesignRaisedButton}"
+                        Width="100" Height="50" FontSize="24" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                        ToolTip="Resource name: MaterialDesignRaisedButton"
+                        Click="BtnXoa_Click"
+                        Foreground="White" Background="#7158e2">
+                    Xóa
+                </Button>
+                <Button x:Name="btnLapDon" Grid.Column="1"
+                        Style="{StaticResource MaterialDesignRaisedButton}"
+                        Width="200" Height="50" FontSize="24" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                        ToolTip="Resource name: MaterialDesignRaisedButton"
+                        Click="BtnLapDon_Click"
+                        Foreground="White" Background="#7158e2">
+                    Lập đơn
+                </Button>
+            </Grid>     
+                
+            <Grid x:Name="detailComboBtn" Grid.Row="5" Grid.Column="1" Visibility="Hidden">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="btnCancel" Grid.Column="0"
+                        Style="{StaticResource MaterialDesignRaisedButton}"
+                        Width="200" Height="50" FontSize="24" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                        ToolTip="Resource name: MaterialDesignRaisedButton"
+                        Click="BtnCancel_Click"
+                        Foreground="White" Background="#7158e2">
+                    HỦY VÉ
+                </Button>
+                    <Button x:Name="btnOK" Grid.Column="1"
+                            Style="{StaticResource MaterialDesignRaisedButton}"
+                            Width="200" Height="50" FontSize="24"
+                            HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                            ToolTip="Resource name: MaterialDesignRaisedButton"
+                            Click="BtnOK_Click"
+                            Foreground="White" Background="OrangeRed">
+                        OK
+                </Button>
+            </Grid>
+        </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>

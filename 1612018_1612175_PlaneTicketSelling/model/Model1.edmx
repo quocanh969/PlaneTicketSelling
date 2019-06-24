@@ -1,0 +1,566 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="QLBanVeMayBayModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CHUYENBAYs">
+          <Key>
+            <PropertyRef Name="MaCB" />
+          </Key>
+          <Property Name="MaCB" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ThoiGianBay" Type="time" Precision="7" />
+          <Property Name="SBDi" Type="char" MaxLength="5" />
+          <Property Name="SBDen" Type="char" MaxLength="5" />
+          <Property Name="GheVip" Type="int" />
+          <Property Name="GheThuong" Type="int" />
+          <Property Name="IsAvailable" Type="bit" />
+        </EntityType>
+        <EntityType Name="HOADONs">
+          <Key>
+            <PropertyRef Name="MaKH" />
+            <PropertyRef Name="MaCB" />
+            <PropertyRef Name="NgayDi" />
+          </Key>
+          <Property Name="MaKH" Type="char" MaxLength="9" Nullable="false" />
+          <Property Name="MaCB" Type="int" Nullable="false" />
+          <Property Name="NgayDi" Type="datetime" Nullable="false" />
+          <Property Name="NgayMua" Type="datetime" />
+          <Property Name="SoVeVip" Type="int" />
+          <Property Name="SoVeThuong" Type="int" />
+          <Property Name="TongTien" Type="int" />
+          <Property Name="IsAvailable" Type="bit" />
+          <Property Name="IsDatCho" Type="bit" />
+        </EntityType>
+        <EntityType Name="KHACHs">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="char" MaxLength="9" Nullable="false" />
+          <Property Name="HoTen" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar(max)" />
+          <Property Name="DiaChi" Type="nvarchar(max)" />
+          <Property Name="SDT" Type="char" MaxLength="10" />
+          <Property Name="IsAvailable" Type="bit" />
+        </EntityType>
+        <EntityType Name="LICHBAYs">
+          <Key>
+            <PropertyRef Name="MaCB" />
+            <PropertyRef Name="NgayDi" />
+          </Key>
+          <Property Name="MaCB" Type="int" Nullable="false" />
+          <Property Name="GioDi" Type="time" Precision="7" />
+          <Property Name="NgayDi" Type="datetime" Nullable="false" />
+          <Property Name="SoGheVip" Type="int" />
+          <Property Name="SoGheThuong" Type="int" />
+          <Property Name="IsAvailable" Type="bit" />
+        </EntityType>
+        <EntityType Name="SANBAYs">
+          <Key>
+            <PropertyRef Name="MaSB" />
+          </Key>
+          <Property Name="MaSB" Type="char" MaxLength="5" Nullable="false" />
+          <Property Name="TenSB" Type="nvarchar(max)" />
+          <Property Name="DiaDiem" Type="nvarchar(max)" />
+          <Property Name="IsAvailable" Type="bit" />
+        </EntityType>
+        <EntityType Name="SBTRUNGGIANs">
+          <Key>
+            <PropertyRef Name="MaCB" />
+            <PropertyRef Name="NgayDi" />
+            <PropertyRef Name="MaSB" />
+          </Key>
+          <Property Name="MaCB" Type="int" Nullable="false" />
+          <Property Name="NgayDi" Type="datetime" Nullable="false" />
+          <Property Name="MaSB" Type="char" MaxLength="5" Nullable="false" />
+          <Property Name="ThoiGianDung" Type="time" Precision="7" />
+          <Property Name="GhiChu" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="USERs">
+          <Key>
+            <PropertyRef Name="CMND" />
+          </Key>
+          <Property Name="CMND" Type="char" MaxLength="9" Nullable="false" />
+          <Property Name="Username" Type="nvarchar(max)" />
+          <Property Name="Pass" Type="nvarchar(max)" />
+          <Property Name="HoTen" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar(max)" />
+          <Property Name="DiaChi" Type="nvarchar(max)" />
+          <Property Name="SDT" Type="char" MaxLength="10" />
+          <Property Name="IsAdmin" Type="bit" />
+          <Property Name="IsAvailable" Type="bit" />
+        </EntityType>
+        <Association Name="FK_MACB_LICHBAY_CHUYENBAY">
+          <End Role="CHUYENBAYs" Type="Self.CHUYENBAYs" Multiplicity="1" />
+          <End Role="LICHBAYs" Type="Self.LICHBAYs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CHUYENBAYs">
+              <PropertyRef Name="MaCB" />
+            </Principal>
+            <Dependent Role="LICHBAYs">
+              <PropertyRef Name="MaCB" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MACB_NGAYDI_CHUYENBAY">
+          <End Role="LICHBAYs" Type="Self.LICHBAYs" Multiplicity="1" />
+          <End Role="SBTRUNGGIANs" Type="Self.SBTRUNGGIANs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LICHBAYs">
+              <PropertyRef Name="MaCB" />
+              <PropertyRef Name="NgayDi" />
+            </Principal>
+            <Dependent Role="SBTRUNGGIANs">
+              <PropertyRef Name="MaCB" />
+              <PropertyRef Name="NgayDi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MAKH_KHACH">
+          <End Role="KHACHs" Type="Self.KHACHs" Multiplicity="1" />
+          <End Role="HOADONs" Type="Self.HOADONs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KHACHs">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HOADONs">
+              <PropertyRef Name="MaKH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MASB_CHUYENBAY">
+          <End Role="SANBAYs" Type="Self.SANBAYs" Multiplicity="1" />
+          <End Role="SBTRUNGGIANs" Type="Self.SBTRUNGGIANs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SANBAYs">
+              <PropertyRef Name="MaSB" />
+            </Principal>
+            <Dependent Role="SBTRUNGGIANs">
+              <PropertyRef Name="MaSB" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NGAYDI_LICHBAY">
+          <End Role="LICHBAYs" Type="Self.LICHBAYs" Multiplicity="1" />
+          <End Role="HOADONs" Type="Self.HOADONs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LICHBAYs">
+              <PropertyRef Name="MaCB" />
+              <PropertyRef Name="NgayDi" />
+            </Principal>
+            <Dependent Role="HOADONs">
+              <PropertyRef Name="MaCB" />
+              <PropertyRef Name="NgayDi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SBDEN_SANBAY">
+          <End Role="SANBAYs" Type="Self.SANBAYs" Multiplicity="0..1" />
+          <End Role="CHUYENBAYs" Type="Self.CHUYENBAYs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SANBAYs">
+              <PropertyRef Name="MaSB" />
+            </Principal>
+            <Dependent Role="CHUYENBAYs">
+              <PropertyRef Name="SBDen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SBDI_SANBAY">
+          <End Role="SANBAYs" Type="Self.SANBAYs" Multiplicity="0..1" />
+          <End Role="CHUYENBAYs" Type="Self.CHUYENBAYs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SANBAYs">
+              <PropertyRef Name="MaSB" />
+            </Principal>
+            <Dependent Role="CHUYENBAYs">
+              <PropertyRef Name="SBDi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="QLBanVeMayBayModelStoreContainer">
+          <EntitySet Name="CHUYENBAYs" EntityType="Self.CHUYENBAYs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HOADONs" EntityType="Self.HOADONs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KHACHs" EntityType="Self.KHACHs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LICHBAYs" EntityType="Self.LICHBAYs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SANBAYs" EntityType="Self.SANBAYs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SBTRUNGGIANs" EntityType="Self.SBTRUNGGIANs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USERs" EntityType="Self.USERs" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_MACB_LICHBAY_CHUYENBAY" Association="Self.FK_MACB_LICHBAY_CHUYENBAY">
+            <End Role="CHUYENBAYs" EntitySet="CHUYENBAYs" />
+            <End Role="LICHBAYs" EntitySet="LICHBAYs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MACB_NGAYDI_CHUYENBAY" Association="Self.FK_MACB_NGAYDI_CHUYENBAY">
+            <End Role="LICHBAYs" EntitySet="LICHBAYs" />
+            <End Role="SBTRUNGGIANs" EntitySet="SBTRUNGGIANs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MAKH_KHACH" Association="Self.FK_MAKH_KHACH">
+            <End Role="KHACHs" EntitySet="KHACHs" />
+            <End Role="HOADONs" EntitySet="HOADONs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MASB_CHUYENBAY" Association="Self.FK_MASB_CHUYENBAY">
+            <End Role="SANBAYs" EntitySet="SANBAYs" />
+            <End Role="SBTRUNGGIANs" EntitySet="SBTRUNGGIANs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NGAYDI_LICHBAY" Association="Self.FK_NGAYDI_LICHBAY">
+            <End Role="LICHBAYs" EntitySet="LICHBAYs" />
+            <End Role="HOADONs" EntitySet="HOADONs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SBDEN_SANBAY" Association="Self.FK_SBDEN_SANBAY">
+            <End Role="SANBAYs" EntitySet="SANBAYs" />
+            <End Role="CHUYENBAYs" EntitySet="CHUYENBAYs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SBDI_SANBAY" Association="Self.FK_SBDI_SANBAY">
+            <End Role="SANBAYs" EntitySet="SANBAYs" />
+            <End Role="CHUYENBAYs" EntitySet="CHUYENBAYs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="QLBanVeMayBayModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CHUYENBAY">
+          <Key>
+            <PropertyRef Name="MaCB" />
+          </Key>
+          <Property Name="MaCB" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ThoiGianBay" Type="Time" Precision="7" />
+          <Property Name="SBDi" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
+          <Property Name="SBDen" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
+          <Property Name="GheVip" Type="Int32" />
+          <Property Name="GheThuong" Type="Int32" />
+          <Property Name="IsAvailable" Type="Boolean" />
+          <NavigationProperty Name="LICHBAYs" Relationship="Self.FK_MACB_LICHBAY_CHUYENBAY" FromRole="CHUYENBAYs" ToRole="LICHBAYs" />
+          <NavigationProperty Name="SANBAY" Relationship="Self.FK_SBDEN_SANBAY" FromRole="CHUYENBAYs" ToRole="SANBAYs" />
+          <NavigationProperty Name="SANBAY1" Relationship="Self.FK_SBDI_SANBAY" FromRole="CHUYENBAYs" ToRole="SANBAYs" />
+        </EntityType>
+        <EntityType Name="HOADON">
+          <Key>
+            <PropertyRef Name="MaKH" />
+            <PropertyRef Name="MaCB" />
+            <PropertyRef Name="NgayDi" />
+          </Key>
+          <Property Name="MaKH" Type="String" MaxLength="9" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="MaCB" Type="Int32" Nullable="false" />
+          <Property Name="NgayDi" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="NgayMua" Type="DateTime" Precision="3" />
+          <Property Name="SoVeVip" Type="Int32" />
+          <Property Name="SoVeThuong" Type="Int32" />
+          <Property Name="TongTien" Type="Int32" />
+          <Property Name="IsAvailable" Type="Boolean" />
+          <Property Name="IsDatCho" Type="Boolean" />
+          <NavigationProperty Name="KHACH" Relationship="Self.FK_MAKH_KHACH" FromRole="HOADONs" ToRole="KHACHs" />
+          <NavigationProperty Name="LICHBAY" Relationship="Self.FK_NGAYDI_LICHBAY" FromRole="HOADONs" ToRole="LICHBAYs" />
+        </EntityType>
+        <EntityType Name="KHACH">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" MaxLength="9" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="HoTen" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DiaChi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SDT" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="IsAvailable" Type="Boolean" />
+          <NavigationProperty Name="HOADONs" Relationship="Self.FK_MAKH_KHACH" FromRole="KHACHs" ToRole="HOADONs" />
+        </EntityType>
+        <EntityType Name="LICHBAY">
+          <Key>
+            <PropertyRef Name="MaCB" />
+            <PropertyRef Name="NgayDi" />
+          </Key>
+          <Property Name="MaCB" Type="Int32" Nullable="false" />
+          <Property Name="GioDi" Type="Time" Precision="7" />
+          <Property Name="NgayDi" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SoGheVip" Type="Int32" />
+          <Property Name="SoGheThuong" Type="Int32" />
+          <Property Name="IsAvailable" Type="Boolean" />
+          <NavigationProperty Name="CHUYENBAY" Relationship="Self.FK_MACB_LICHBAY_CHUYENBAY" FromRole="LICHBAYs" ToRole="CHUYENBAYs" />
+          <NavigationProperty Name="HOADONs" Relationship="Self.FK_NGAYDI_LICHBAY" FromRole="LICHBAYs" ToRole="HOADONs" />
+          <NavigationProperty Name="SBTRUNGGIANs" Relationship="Self.FK_MACB_NGAYDI_CHUYENBAY" FromRole="LICHBAYs" ToRole="SBTRUNGGIANs" />
+        </EntityType>
+        <EntityType Name="SANBAY">
+          <Key>
+            <PropertyRef Name="MaSB" />
+          </Key>
+          <Property Name="MaSB" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="TenSB" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DiaDiem" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsAvailable" Type="Boolean" />
+          <NavigationProperty Name="CHUYENBAYs" Relationship="Self.FK_SBDEN_SANBAY" FromRole="SANBAYs" ToRole="CHUYENBAYs" />
+          <NavigationProperty Name="CHUYENBAYs1" Relationship="Self.FK_SBDI_SANBAY" FromRole="SANBAYs" ToRole="CHUYENBAYs" />
+          <NavigationProperty Name="SBTRUNGGIANs" Relationship="Self.FK_MASB_CHUYENBAY" FromRole="SANBAYs" ToRole="SBTRUNGGIANs" />
+        </EntityType>
+        <EntityType Name="SBTRUNGGIAN">
+          <Key>
+            <PropertyRef Name="MaCB" />
+            <PropertyRef Name="NgayDi" />
+            <PropertyRef Name="MaSB" />
+          </Key>
+          <Property Name="MaCB" Type="Int32" Nullable="false" />
+          <Property Name="NgayDi" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="MaSB" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="ThoiGianDung" Type="Time" Precision="7" />
+          <Property Name="GhiChu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="LICHBAY" Relationship="Self.FK_MACB_NGAYDI_CHUYENBAY" FromRole="SBTRUNGGIANs" ToRole="LICHBAYs" />
+          <NavigationProperty Name="SANBAY" Relationship="Self.FK_MASB_CHUYENBAY" FromRole="SBTRUNGGIANs" ToRole="SANBAYs" />
+        </EntityType>
+        <EntityType Name="USER">
+          <Key>
+            <PropertyRef Name="CMND" />
+          </Key>
+          <Property Name="CMND" Type="String" MaxLength="9" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Username" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Pass" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="HoTen" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DiaChi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SDT" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="IsAdmin" Type="Boolean" />
+          <Property Name="IsAvailable" Type="Boolean" />
+        </EntityType>
+        <Association Name="FK_MACB_LICHBAY_CHUYENBAY">
+          <End Role="CHUYENBAYs" Type="Self.CHUYENBAY" Multiplicity="1" />
+          <End Role="LICHBAYs" Type="Self.LICHBAY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CHUYENBAYs">
+              <PropertyRef Name="MaCB" />
+            </Principal>
+            <Dependent Role="LICHBAYs">
+              <PropertyRef Name="MaCB" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SBDEN_SANBAY">
+          <End Role="SANBAYs" Type="Self.SANBAY" Multiplicity="0..1" />
+          <End Role="CHUYENBAYs" Type="Self.CHUYENBAY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SANBAYs">
+              <PropertyRef Name="MaSB" />
+            </Principal>
+            <Dependent Role="CHUYENBAYs">
+              <PropertyRef Name="SBDen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SBDI_SANBAY">
+          <End Role="SANBAYs" Type="Self.SANBAY" Multiplicity="0..1" />
+          <End Role="CHUYENBAYs" Type="Self.CHUYENBAY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SANBAYs">
+              <PropertyRef Name="MaSB" />
+            </Principal>
+            <Dependent Role="CHUYENBAYs">
+              <PropertyRef Name="SBDi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MAKH_KHACH">
+          <End Role="KHACHs" Type="Self.KHACH" Multiplicity="1" />
+          <End Role="HOADONs" Type="Self.HOADON" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KHACHs">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HOADONs">
+              <PropertyRef Name="MaKH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NGAYDI_LICHBAY">
+          <End Role="LICHBAYs" Type="Self.LICHBAY" Multiplicity="1" />
+          <End Role="HOADONs" Type="Self.HOADON" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LICHBAYs">
+              <PropertyRef Name="MaCB" />
+              <PropertyRef Name="NgayDi" />
+            </Principal>
+            <Dependent Role="HOADONs">
+              <PropertyRef Name="MaCB" />
+              <PropertyRef Name="NgayDi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MACB_NGAYDI_CHUYENBAY">
+          <End Role="LICHBAYs" Type="Self.LICHBAY" Multiplicity="1" />
+          <End Role="SBTRUNGGIANs" Type="Self.SBTRUNGGIAN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LICHBAYs">
+              <PropertyRef Name="MaCB" />
+              <PropertyRef Name="NgayDi" />
+            </Principal>
+            <Dependent Role="SBTRUNGGIANs">
+              <PropertyRef Name="MaCB" />
+              <PropertyRef Name="NgayDi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MASB_CHUYENBAY">
+          <End Role="SANBAYs" Type="Self.SANBAY" Multiplicity="1" />
+          <End Role="SBTRUNGGIANs" Type="Self.SBTRUNGGIAN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SANBAYs">
+              <PropertyRef Name="MaSB" />
+            </Principal>
+            <Dependent Role="SBTRUNGGIANs">
+              <PropertyRef Name="MaSB" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="QLBanVeMayBayEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CHUYENBAYs" EntityType="Self.CHUYENBAY" />
+          <EntitySet Name="HOADONs" EntityType="Self.HOADON" />
+          <EntitySet Name="KHACHs" EntityType="Self.KHACH" />
+          <EntitySet Name="LICHBAYs" EntityType="Self.LICHBAY" />
+          <EntitySet Name="SANBAYs" EntityType="Self.SANBAY" />
+          <EntitySet Name="SBTRUNGGIANs" EntityType="Self.SBTRUNGGIAN" />
+          <EntitySet Name="USERs" EntityType="Self.USER" />
+          <AssociationSet Name="FK_MACB_LICHBAY_CHUYENBAY" Association="Self.FK_MACB_LICHBAY_CHUYENBAY">
+            <End Role="CHUYENBAYs" EntitySet="CHUYENBAYs" />
+            <End Role="LICHBAYs" EntitySet="LICHBAYs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SBDEN_SANBAY" Association="Self.FK_SBDEN_SANBAY">
+            <End Role="SANBAYs" EntitySet="SANBAYs" />
+            <End Role="CHUYENBAYs" EntitySet="CHUYENBAYs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SBDI_SANBAY" Association="Self.FK_SBDI_SANBAY">
+            <End Role="SANBAYs" EntitySet="SANBAYs" />
+            <End Role="CHUYENBAYs" EntitySet="CHUYENBAYs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MAKH_KHACH" Association="Self.FK_MAKH_KHACH">
+            <End Role="KHACHs" EntitySet="KHACHs" />
+            <End Role="HOADONs" EntitySet="HOADONs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NGAYDI_LICHBAY" Association="Self.FK_NGAYDI_LICHBAY">
+            <End Role="LICHBAYs" EntitySet="LICHBAYs" />
+            <End Role="HOADONs" EntitySet="HOADONs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MACB_NGAYDI_CHUYENBAY" Association="Self.FK_MACB_NGAYDI_CHUYENBAY">
+            <End Role="LICHBAYs" EntitySet="LICHBAYs" />
+            <End Role="SBTRUNGGIANs" EntitySet="SBTRUNGGIANs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MASB_CHUYENBAY" Association="Self.FK_MASB_CHUYENBAY">
+            <End Role="SANBAYs" EntitySet="SANBAYs" />
+            <End Role="SBTRUNGGIANs" EntitySet="SBTRUNGGIANs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="QLBanVeMayBayModelStoreContainer" CdmEntityContainer="QLBanVeMayBayEntities">
+          <EntitySetMapping Name="CHUYENBAYs">
+            <EntityTypeMapping TypeName="QLBanVeMayBayModel.CHUYENBAY">
+              <MappingFragment StoreEntitySet="CHUYENBAYs">
+                <ScalarProperty Name="MaCB" ColumnName="MaCB" />
+                <ScalarProperty Name="ThoiGianBay" ColumnName="ThoiGianBay" />
+                <ScalarProperty Name="SBDi" ColumnName="SBDi" />
+                <ScalarProperty Name="SBDen" ColumnName="SBDen" />
+                <ScalarProperty Name="GheVip" ColumnName="GheVip" />
+                <ScalarProperty Name="GheThuong" ColumnName="GheThuong" />
+                <ScalarProperty Name="IsAvailable" ColumnName="IsAvailable" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HOADONs">
+            <EntityTypeMapping TypeName="QLBanVeMayBayModel.HOADON">
+              <MappingFragment StoreEntitySet="HOADONs">
+                <ScalarProperty Name="MaKH" ColumnName="MaKH" />
+                <ScalarProperty Name="MaCB" ColumnName="MaCB" />
+                <ScalarProperty Name="NgayDi" ColumnName="NgayDi" />
+                <ScalarProperty Name="NgayMua" ColumnName="NgayMua" />
+                <ScalarProperty Name="SoVeVip" ColumnName="SoVeVip" />
+                <ScalarProperty Name="SoVeThuong" ColumnName="SoVeThuong" />
+                <ScalarProperty Name="TongTien" ColumnName="TongTien" />
+                <ScalarProperty Name="IsAvailable" ColumnName="IsAvailable" />
+                <ScalarProperty Name="IsDatCho" ColumnName="IsDatCho" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KHACHs">
+            <EntityTypeMapping TypeName="QLBanVeMayBayModel.KHACH">
+              <MappingFragment StoreEntitySet="KHACHs">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="HoTen" ColumnName="HoTen" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="SDT" ColumnName="SDT" />
+                <ScalarProperty Name="IsAvailable" ColumnName="IsAvailable" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LICHBAYs">
+            <EntityTypeMapping TypeName="QLBanVeMayBayModel.LICHBAY">
+              <MappingFragment StoreEntitySet="LICHBAYs">
+                <ScalarProperty Name="MaCB" ColumnName="MaCB" />
+                <ScalarProperty Name="GioDi" ColumnName="GioDi" />
+                <ScalarProperty Name="NgayDi" ColumnName="NgayDi" />
+                <ScalarProperty Name="SoGheVip" ColumnName="SoGheVip" />
+                <ScalarProperty Name="SoGheThuong" ColumnName="SoGheThuong" />
+                <ScalarProperty Name="IsAvailable" ColumnName="IsAvailable" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SANBAYs">
+            <EntityTypeMapping TypeName="QLBanVeMayBayModel.SANBAY">
+              <MappingFragment StoreEntitySet="SANBAYs">
+                <ScalarProperty Name="MaSB" ColumnName="MaSB" />
+                <ScalarProperty Name="TenSB" ColumnName="TenSB" />
+                <ScalarProperty Name="DiaDiem" ColumnName="DiaDiem" />
+                <ScalarProperty Name="IsAvailable" ColumnName="IsAvailable" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SBTRUNGGIANs">
+            <EntityTypeMapping TypeName="QLBanVeMayBayModel.SBTRUNGGIAN">
+              <MappingFragment StoreEntitySet="SBTRUNGGIANs">
+                <ScalarProperty Name="MaCB" ColumnName="MaCB" />
+                <ScalarProperty Name="NgayDi" ColumnName="NgayDi" />
+                <ScalarProperty Name="MaSB" ColumnName="MaSB" />
+                <ScalarProperty Name="ThoiGianDung" ColumnName="ThoiGianDung" />
+                <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USERs">
+            <EntityTypeMapping TypeName="QLBanVeMayBayModel.USER">
+              <MappingFragment StoreEntitySet="USERs">
+                <ScalarProperty Name="CMND" ColumnName="CMND" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Pass" ColumnName="Pass" />
+                <ScalarProperty Name="HoTen" ColumnName="HoTen" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="SDT" ColumnName="SDT" />
+                <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
+                <ScalarProperty Name="IsAvailable" ColumnName="IsAvailable" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

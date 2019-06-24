@@ -1,0 +1,279 @@
+﻿<UserControl x:Class="_1612018_1612175_PlaneTicketSelling.view.addNewShedule"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:_1612018_1612175_PlaneTicketSelling.view"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"             
+             mc:Ignorable="d" Background="White" IsVisibleChanged="UserControl_IsVisibleChanged"
+             d:DesignHeight="630" d:DesignWidth="1040">
+    <Grid>
+        <Label x:Name="lblScheTitle" FontFamily="Times New Roman" FontWeight="Bold" FontSize="34"
+                       VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,10,0,0">THÊM LỊCH BAY MỚI
+        </Label>
+
+        <Button x:Name="btnBack" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" 
+                    Width="60" Height="60" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                    Background="Transparent" BorderThickness="0" Click="BtnBack_Click">
+            <materialDesign:PackIcon Kind="ArrowBack" Width="40" Height="40" VerticalAlignment="Center" HorizontalAlignment="Center" ></materialDesign:PackIcon>
+        </Button>
+
+        <Border Margin="10,65,10,10" BorderBrush="Black" BorderThickness="2" CornerRadius="20">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <!--Mã chuyến bay-->
+                <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Stretch">
+                    <materialDesign:PackIcon Kind="AirplaneTakeoff" Foreground="Black" 
+                                                     VerticalAlignment="Center" Margin="20,0,0,0"
+                                                     Width="50" Height="50"></materialDesign:PackIcon>
+                    <ComboBox x:Name="cmbMaCB" materialDesign:HintAssist.Hint="Mã chuyến bay..." 
+                              FontSize="25" Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                          SelectionChanged="CmbMaCB_SelectionChanged" IsEditable="False"
+                              VerticalAlignment="Center" Width="350" Margin="20,0,20,0">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding MaCB}"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                </StackPanel>
+
+                <!--SB đi-->
+                <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch">
+                    <materialDesign:PackIcon Kind="AeroplaneTakeoff" Foreground="Black" 
+                                                     VerticalAlignment="Center" Margin="20,0,0,0"
+                                                     Width="50" Height="50"></materialDesign:PackIcon>
+                    <TextBox x:Name="txtSBDi" materialDesign:HintAssist.Hint="Sân bay đi" 
+                              FontSize="25"
+                              IsEnabled="False"                                        
+                              VerticalAlignment="Center" Width="350" Margin="20,0,20,0"/>
+                </StackPanel>
+
+                <!--SB đến-->
+                <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Stretch">
+                    <materialDesign:PackIcon Kind="AirplaneLanding" Foreground="Black" 
+                                                     VerticalAlignment="Center" Margin="20,0,0,0"
+                                                     Width="50" Height="50"></materialDesign:PackIcon>
+                    <TextBox x:Name="txtSBDen" materialDesign:HintAssist.Hint="Sân bay đến" 
+                              FontSize="25"
+                              IsEnabled="False"                              
+                              VerticalAlignment="Center" Width="350" Margin="20,0,20,0"/>
+                </StackPanel>
+
+
+                <!--Số ghế-->
+                <StackPanel x:Name="SeatCombo" Orientation="Horizontal"
+                        Visibility="Hidden"
+                            Grid.Row="5" Grid.Column="0" VerticalAlignment="Center">
+                    <Label FontSize="20" Margin="20,0,0,0" FontWeight="Bold" Content="Số ghế thường:"/>
+                    <TextBox x:Name="txtNormalSeats" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="10,0,20,0"
+                              Width="50" FontSize="24"/>
+                    <Label FontSize="20" Margin="20,0,0,0" FontWeight="Bold" Content="Số ghế VIP:"/>
+                    <TextBox x:Name="txtVIPSeats" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="47,0,20,0"
+                              Width="50" FontSize="24"/>
+                </StackPanel>
+
+                <!--Ngày bay-->
+                <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch">
+                    <Label FontWeight="Bold" VerticalAlignment="Center" Margin="20,0,0,0"
+                           FontSize="25"
+                           Content="Ngày bay:"/>
+                    <DatePicker x:Name="dp_ngaybay" VerticalAlignment="Center" Margin="50,0,20,10"
+                              Width="300"
+                              materialDesign:HintAssist.Hint=""
+                              Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                </StackPanel>
+
+                <!--Thời lượng chuyến bay-->
+                <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Stretch">
+                    <Label FontWeight="Bold" VerticalAlignment="Center" Margin="20,0,0,0"
+                           FontSize="25"
+                           Content="Thời lượng bay:"/>
+                    <TextBox VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="20,0,0,0"
+                              x:Name="txtDefaultHrs" Width="50" FontSize="24"
+                         IsEnabled="False"
+                              materialDesign:HintAssist.Hint="Giờ">
+                    </TextBox>
+                    <Label FontWeight="Bold" VerticalAlignment="Center" Margin="0,0,10,0"
+                           FontSize="25"
+                           Content="h"/>
+                    <TextBox VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="20,0,0,0"
+                              x:Name="txtDefaultMins" Width="50" FontSize="24"
+                         IsEnabled="False"
+                              materialDesign:HintAssist.Hint="Phút">
+                    </TextBox>
+                    <Label FontWeight="Bold" VerticalAlignment="Center" Margin="0,0,10,0"
+                           FontSize="25"
+                           Content="p"/>
+                </StackPanel>
+
+                <!--Giờ bay-->
+                <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Stretch">
+                    <Label FontWeight="Bold" VerticalAlignment="Center" Margin="20,0,0,0"
+                           FontSize="25"
+                           Content="Giờ bay:"/>
+                    <TextBox VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="20,0,0,0"
+                              x:Name="txtHrs" Width="50" FontSize="24"
+                              materialDesign:HintAssist.Hint="Giờ">
+                    </TextBox>
+                    <Label FontWeight="Bold" VerticalAlignment="Center" Margin="0,0,10,0"
+                           FontSize="25"
+                           Content="h"/>
+                    <TextBox VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="20,0,0,0"
+                              x:Name="txtMins" Width="50" FontSize="24"
+                              materialDesign:HintAssist.Hint="Phút">
+                    </TextBox>
+                    <Label FontWeight="Bold" VerticalAlignment="Center" Margin="0,0,10,0"
+                           FontSize="25"
+                           Content="p"/>
+                </StackPanel>
+
+                <!-- Sân bay trung gian -->
+                <StackPanel Orientation="Horizontal"
+                            Grid.Row="1" Grid.Column="1" VerticalAlignment="Center">
+                    <Label VerticalAlignment="Bottom" FontSize="20" Margin="20,0,0,0" FontWeight="Bold" Content="Thêm sân bay trung gian:"/>
+                    <ComboBox x:Name="cmbSBTrungGian" materialDesign:HintAssist.Hint="Chọn sân bay"
+                              FontSize="20" VerticalContentAlignment="Center"
+                              IsEditable="False"
+                              Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                              VerticalAlignment="Center" Margin="10,0,20,0">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding MaSB}"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+
+
+
+                    <Button x:Name="btnAddTransit" Click="btnAddTransitClick"
+                                Style="{StaticResource MaterialDesignRaisedButton}"
+                                ToolTip="Resource name: MaterialDesignRaisedButton"
+                                Background="#7158e2" Width="50" Height="50"
+                                Margin="20,0,0,0"
+                                VerticalAlignment="Center" HorizontalAlignment="Right"
+                                HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                        <DockPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Canvas Width="30" Height="30" HorizontalAlignment="Center">
+                                <materialDesign:PackIcon Kind="Add" Foreground="White" Height="30" Width="30"/>
+                            </Canvas>
+                        </DockPanel>
+                    </Button>
+                </StackPanel>
+
+                <!--Danh sách sân bay trung gian-->
+                <DataGrid x:Name="listView_SBTG" Margin="0,0,0,0"
+                          Grid.RowSpan="3"
+                          HorizontalAlignment="Stretch" VerticalAlignment="Stretch"                          
+                          Width="auto"
+                          ScrollViewer.VerticalScrollBarVisibility="Visible"   
+                      CanUserSortColumns="True"
+                              CanUserAddRows="False" AutoGenerateColumns="False"
+                          Grid.Column="1" Grid.Row="2" FontSize="20">
+                    <DataGrid.Columns>
+                        <!-- Mã sân bay-->
+                        <DataGridTextColumn Width="100"
+                                Binding="{Binding MaSB}" Header="Mã sân bay" IsReadOnly="True"
+                                EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
+
+                        <!-- Tên sân bay -->
+                        <DataGridTextColumn Width="110"
+                                Binding="{Binding TenSB}" Header="Tên sân bay" IsReadOnly="True"
+                                EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
+
+                        <!-- Địa điểm -->
+                        <DataGridTextColumn Width="*"
+                                Binding="{Binding DiaDiem}" Header="Địa điểm" IsReadOnly="True"
+                                EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
+
+                        <!-- Combo button-->
+                        <DataGridTemplateColumn Width="110" Header="Thêm ghi chú" IsReadOnly="True">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <WrapPanel Orientation="Horizontal">
+                                        <Button x:Name="AddNote"
+                                            Width="40" Background="Transparent" Foreground="Black"
+                                            FontSize="15" HorizontalContentAlignment="Left"
+                                            BorderThickness="0" HorizontalAlignment="Left"                                            
+                                            Click="AddNote_Click">
+                                            <materialDesign:PackIcon Kind="Edit" Margin="-10,0,0,0"/>
+                                        </Button>
+                                        <Button x:Name="DeleteNote"
+                                            Width="40" Background="Transparent" Foreground="Black"
+                                            FontSize="15" HorizontalContentAlignment="Left"
+                                            BorderThickness="0" HorizontalAlignment="Left"                                            
+                                            Click="DeleteNote_Click">
+                                            <materialDesign:PackIcon Kind="Bin" Margin="-10,0,0,0"/>
+                                        </Button>
+                                    </WrapPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+
+                <Grid x:Name="AddCombo" Grid.Row="5" Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="btnClear" Grid.Column="0"
+                                Style="{StaticResource MaterialDesignRaisedButton}"
+                                Width="100" Height="50" FontSize="24" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                                ToolTip="Resource name: MaterialDesignRaisedButton"
+                        Click="BtnClear_Click"
+                                Foreground="White" Background="#7158e2">
+                        Xóa
+                    </Button>
+                    <Button x:Name="btnAddShedule" Grid.Column="1"
+                                Style="{StaticResource MaterialDesignRaisedButton}"
+                                Width="200" Height="50" FontSize="24" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                                ToolTip="Resource name: MaterialDesignRaisedButton"
+                        Click="BtnAddShedule_Click"
+                                Foreground="White" Background="#7158e2">
+                        Thêm lịch
+                    </Button>
+                </Grid>
+
+                <Grid x:Name="EditCombo" Grid.Row="5" Grid.Column="1" Visibility="Hidden">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="btnCancel" Grid.Column="0"
+                                Style="{StaticResource MaterialDesignRaisedButton}"
+                                ToolTip="Resource name: MaterialDesignRaisedButton"
+                                Background="#7158e2" Width="200" Height="50"
+                                Margin="0,10,10,0" Click="BtnCancel_Click" FontSize="30"
+                                VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White"
+                                HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                        CANCEL
+                    </Button>
+                    <Button x:Name="btnOK" Grid.Column="1"
+                                Style="{StaticResource MaterialDesignRaisedButton}"
+                                ToolTip="Resource name: MaterialDesignRaisedButton"
+                                Background="OrangeRed" Width="200" Height="50" FontSize="30"
+                                Margin="0,10,10,0" Click="BtnOK_Click" Foreground="White"
+                                VerticalAlignment="Center" HorizontalAlignment="Center"
+                                HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                        OK
+                    </Button>
+                </Grid>
+            </Grid>
+        </Border>
+
+    </Grid>
+</UserControl>

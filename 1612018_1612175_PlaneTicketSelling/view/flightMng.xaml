@@ -1,0 +1,279 @@
+﻿<UserControl x:Class="_1612018_1612175_PlaneTicketSelling.view.flightMng"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:_1612018_1612175_PlaneTicketSelling.view"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" Background="White" IsVisibleChanged="UserControl_IsVisibleChanged"
+             xmlns:myUC="clr-namespace:_1612018_1612175_PlaneTicketSelling.view"
+    d:DesignHeight="630" d:DesignWidth="1040">
+    <Grid HorizontalAlignment="Stretch">
+        <TabControl x:Name="tab" FontSize="24" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,230,0" SelectionChanged="Tab_SelectionChanged">
+
+            <TabItem x:Name="tabItemLichBay" Header="Lịch bay">
+                <Grid HorizontalAlignment="Stretch">
+                    <!--button thêm chuyến bay-->
+                    <DockPanel VerticalAlignment="Top" HorizontalAlignment="Stretch">
+                        <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="QUẢN LÝ LỊCH BAY"
+                               Margin="10,10,0,0"
+                               FontFamily="Times New Roman" FontWeight="Bold" FontSize="34"/>
+                        <Button x:Name="btnAddFlightShedule" 
+                                Style="{StaticResource MaterialDesignRaisedButton}"
+                                ToolTip="Resource name: MaterialDesignRaisedButton"
+                                Background="#7158e2" Width="180" Height="40"
+                                Margin="0,10,20,0"
+                                Click="BtnAddFlightShedule_Click"
+                                VerticalAlignment="Center" HorizontalAlignment="Right"
+                                HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                            <DockPanel>
+                                <Canvas Width="50" Height="30">
+                                    <materialDesign:PackIcon Kind="CalendarDay" Foreground="White" Height="30" Width="30" RenderTransformOrigin="0.692,0.188"/>
+                                    <materialDesign:PackIcon Kind="Add" Foreground="White" Canvas.Left="30" RenderTransformOrigin="0.183,0.792"></materialDesign:PackIcon>
+                                </Canvas>
+                                <TextBlock VerticalAlignment="Center" Margin="5,0,0,0" Foreground="White"><Run Text="Thêm lịch bay"/></TextBlock>
+                            </DockPanel>
+                        </Button>
+                    </DockPanel>
+                    
+                    <!--bảng lịch bay-->
+                    <DataGrid x:Name="dataLichBay" HorizontalAlignment="Stretch"
+                              CanUserSortColumns="True"
+                              CanUserAddRows="False" AutoGenerateColumns="False"
+                              Margin="10,80,10,10" VerticalAlignment="Stretch">
+                        <DataGrid.Columns>
+                            <!-- Mã chuyến bay -->
+                            <DataGridTextColumn Width="70"
+                                Binding="{Binding MaCB}" Header="Mã CB" IsReadOnly="True"
+                                EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
+
+                            <!-- Sân bay đi -->
+                            <DataGridTextColumn Width="90"
+                                Binding="{Binding SBDi}" Header="Sân bay đi" IsReadOnly="True"
+                                EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
+
+                            <!-- Sân bay đến -->
+                            <DataGridTextColumn Width="100"
+                                Binding="{Binding SBDen}" Header="Sân bay đến" IsReadOnly="True"
+                                EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
+
+                            <!-- Ngày bay -->
+                            <DataGridTextColumn Width="*"
+                                Binding="{Binding NgayDi, StringFormat=\{0:dd/MM/yyyy\}}" Header="Ngày đi" IsReadOnly="True"
+                                EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
+
+                            <!-- Giờ bay -->
+                            <DataGridTextColumn Width="75"
+                                Binding="{Binding GioDi, StringFormat=hh\\:mm}" Header="Giờ bay" IsReadOnly="True"
+                                EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
+
+                            <!-- Thời gian bay -->
+                            <DataGridTextColumn Width="110"
+                                Binding="{Binding ThoiGianBay, StringFormat=hh\\:mm}" Header="Thời gian bay" IsReadOnly="True"
+                                EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
+
+                            <!-- Số ghế thường -->
+                            <DataGridTextColumn Width="115"
+                                Binding="{Binding SoGheThuong}" Header="Số ghế thường" IsReadOnly="True"
+                                EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
+
+                            <!-- Số ghế VIP -->
+                            <DataGridTextColumn Width="100"
+                                Binding="{Binding SoGheVip}" Header="Số ghế VIP" IsReadOnly="True"
+                                EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+
+            <TabItem x:Name="tabItemChuyenBay" Header="Chuyến bay">
+                <Grid HorizontalAlignment="Stretch">
+                    <!--button thêm chuyến bay-->
+                    <DockPanel VerticalAlignment="Top" HorizontalAlignment="Stretch" Width="800">
+                        <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="QUẢN LÝ CHUYẾN BAY"
+                               Margin="10,10,0,0"
+                               FontFamily="Times New Roman" FontWeight="Bold" FontSize="34"/>
+                        <Button x:Name="btnAddFlight" 
+                                Style="{StaticResource MaterialDesignRaisedButton}"
+                                ToolTip="Resource name: MaterialDesignRaisedButton"
+                                Background="#7158e2" Width="220" Height="40"
+                                Margin="0,10,20,0"
+                                VerticalAlignment="Center" HorizontalAlignment="Right"
+                                HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="btnAddFlightClick">
+                            <DockPanel>
+                                <Canvas Width="50" Height="30">
+                                    <materialDesign:PackIcon Kind="AeroplaneTakeoff" Foreground="White" Height="30" Width="30"/>
+                                    <materialDesign:PackIcon Kind="Add" Foreground="White" Canvas.Left="30"></materialDesign:PackIcon>
+                                </Canvas>
+                                <TextBlock Margin="5,0,0,0" VerticalAlignment="Center" Foreground="White"><Run Text="Thêm chuyến bay"/></TextBlock>
+                            </DockPanel>
+                        </Button>
+                    </DockPanel>
+                    <!--Bảng thông tin các chuyến bay-->
+                    <DataGrid x:Name="dataChuyenBay" HorizontalAlignment="Stretch"
+                              Margin="10,80,10,10" VerticalAlignment="Stretch"
+                              CanUserSortColumns="True"
+                              CanUserAddRows="False" AutoGenerateColumns="False" >
+                        <DataGrid.Columns>
+                            <!-- Mã chuyến bay -->
+                            <DataGridTextColumn Width="70"
+                                    Binding="{Binding MaCB}" Header="Mã CB" IsReadOnly="True"
+                                    EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
+
+                            <!-- Sân bay đi -->
+                            <DataGridTextColumn Width="90"
+                                    Binding="{Binding SBDi}" Header="Sân bay đi" IsReadOnly="True"
+                                    EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
+
+                            <!-- Sân bay đến -->
+                            <DataGridTextColumn Width="100"
+                                    Binding="{Binding SBDen}" Header="Sân bay đến" IsReadOnly="True"
+                                    EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
+
+                            <!-- Thời gian bay -->
+                            <DataGridTextColumn Width="110"
+                                    Binding="{Binding ThoiGianBay, StringFormat=hh\\:mm}" Header="Thời gian bay" IsReadOnly="True"
+                                    EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
+
+                            <!-- Số ghế thường -->
+                            <DataGridTextColumn Width="115"
+                                    Binding="{Binding GheThuong}" Header="Số ghế thường" IsReadOnly="True"
+                                    EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
+
+                            <!-- Số ghế VIP -->
+                            <DataGridTextColumn Width="100"
+                                    Binding="{Binding GheVip}" Header="Số ghế VIP" IsReadOnly="True"
+                                    EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+            
+        </TabControl>
+        
+        <!--Menu-->
+        <Grid Margin="10,0,10,0" HorizontalAlignment="Right">
+            <StackPanel >
+                <!--search box for text-->
+                <TextBox x:Name="txtSearchBox" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="10,25,10,0"
+                            BorderThickness="0,0,0,2" Visibility="Visible"
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                    <materialDesign:HintAssist.Hint>
+                        <StackPanel
+                                  Orientation="Horizontal"
+                                  Margin="-2 0 0 0">
+                            <materialDesign:PackIcon Kind="Search" Height="30" Width="30"/>
+                            <TextBlock>
+                                    Search Box
+                            </TextBlock>
+                        </StackPanel>
+                    </materialDesign:HintAssist.Hint>
+                </TextBox>
+
+                <!--search box for day-->
+                <DatePicker x:Name="dpSearchBox" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="10,40,10,0"
+                            Visibility="Collapsed"
+                            materialDesign:HintAssist.Hint="Search Box"/>
+                
+                <!--search box for time-->
+                <Label  x:Name="lblTimeSearch" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Stretch"
+                        VerticalContentAlignment="Bottom" HorizontalContentAlignment="Center"
+                        Visibility="Collapsed"
+                        Content="Search Time"/>
+                <TextBlock x:Name="timeSearchBox" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Stretch"
+                           Visibility="Visible">                    
+                    Giờ: 
+                    <TextBox x:Name="hourSearchBox" Width="40" HorizontalAlignment="Center"
+                             VerticalContentAlignment="Bottom" HorizontalContentAlignment="Center"/>                    
+                    Phút: 
+                    <TextBox x:Name="minSearchBox" Width="40" HorizontalAlignment="Center"
+                             VerticalContentAlignment="Bottom" HorizontalContentAlignment="Center"/>
+                </TextBlock>
+
+                <ComboBox x:Name="cmbSearchFilter" Margin="10,10" FontSize="20"
+                      materialDesign:HintAssist.Hint="Filter" SelectedIndex="0"
+                      IsEditable="False" SelectionChanged="CmbSearchFilter_SelectionChanged"
+                      Style="{StaticResource MaterialDesignFloatingHintComboBox}">                    
+                </ComboBox>
+
+                <Button x:Name="btnSearch" Background="OrangeRed" MaxWidth="260" Margin="0,10"
+                            Style="{StaticResource MaterialDesignRaisedButton}"
+                            Width="Auto" Height="Auto" Click="BtnSearch_Click"
+                            ToolTip="Resource name: MaterialDesignRaisedButton">
+                    <DockPanel>
+                        <materialDesign:PackIcon Kind="Search" Width="25" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" />
+                        <TextBlock FontSize="20" Foreground="White" Margin="10,0,0,0"> Search</TextBlock>
+                    </DockPanel>
+                </Button>
+
+                <Button x:Name="btnRefreshCancel" Background="#7158e2" MaxWidth="260" Margin="0,10"
+                            Style="{StaticResource MaterialDesignRaisedButton}"
+                            Width="Auto" Height="Auto" Click="BtnRefreshCancel_Click"
+                            ToolTip="Resource name: MaterialDesignRaisedButton">
+                    <DockPanel>
+                        <materialDesign:PackIcon Kind="Refresh" Width="25" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" />
+                        <TextBlock FontSize="20" Foreground="White" Margin="10,0,0,0"> Refresh/ Cancel</TextBlock>
+                    </DockPanel>
+                </Button>
+
+                <Button x:Name="btnEditDetail" Background="#7158e2" Margin="0,10" MaxWidth="260"
+                            Style="{StaticResource MaterialDesignRaisedButton}"
+                            Width="Auto" Height="Auto"
+                            ToolTip="Resource name: MaterialDesignRaisedButton" Click="flightDetailBtnClick">
+                    <DockPanel>
+                        <materialDesign:PackIcon Kind="Edit" Width="25" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" />
+                        <TextBlock FontSize="20" Foreground="White" Margin="10,0,0,0">Sửa/ Chi tiết</TextBlock>
+                    </DockPanel>
+                </Button>
+
+                <Button x:Name="btnDelete" Background="#7158e2" Margin="0,10" MaxWidth="260"
+                            Style="{StaticResource MaterialDesignRaisedButton}"
+                            Width="Auto" Height="Auto" Click="BtnDelete_Click"
+                            ToolTip="Resource name: MaterialDesignRaisedButton">
+                    <DockPanel>
+                        <materialDesign:PackIcon Kind="Delete" Width="25" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" />
+                        <TextBlock FontSize="20" Foreground="White" Margin="10,0,0,0"> Xóa</TextBlock>
+                    </DockPanel>
+                </Button>
+
+                <Border CornerRadius="10"
+                            BorderBrush="#7158e2"
+                            BorderThickness="5"
+                            HorizontalAlignment="Left"
+                            Margin="0,10,0,0"
+                            Width="210" Height="auto
+                        ">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" Height="50"
+                           Content="Số chuyến bay" Foreground="Black" FontSize="25"
+                           VerticalContentAlignment="Bottom" HorizontalContentAlignment="Center"/>
+                        <Label x:Name="lblSo_chuyen_bay" Grid.Row="1" Height="40"
+                           Content="50" Foreground="Black" FontSize="28" Margin="0,-15,0,0"
+                           VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+
+                        <Rectangle Grid.Row="2" Width="190" Height="5" Fill="#7158e2"/>
+                        <Label Grid.Row="3" Height="50"
+                           Content="Số lịch bay" Foreground="Black" FontSize="25"
+                           VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+                        <Label x:Name="lblSo_lich_bay" Grid.Row="4" Height="40"
+                           Content="50" Foreground="Black" FontSize="28" Margin="0,-15,0,0"
+                           VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+                    </Grid>
+                </Border>
+
+                
+                
+            </StackPanel>
+        </Grid>
+
+        <myUC:addFlight x:Name="addFlightUC" Visibility="Collapsed"/>
+        <myUC:addNewShedule x:Name="addSheduleUC" Visibility="Collapsed"/>        
+    </Grid>
+</UserControl>

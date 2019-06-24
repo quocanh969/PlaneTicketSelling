@@ -1,0 +1,188 @@
+﻿<UserControl x:Class="_1612018_1612175_PlaneTicketSelling.view.scheduleMng"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:_1612018_1612175_PlaneTicketSelling.view"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" Background="White"
+             d:DesignHeight="630" d:DesignWidth="1040"
+             xmlns:myUC="clr-namespace:_1612018_1612175_PlaneTicketSelling.view">
+    <Grid>
+
+        <Grid HorizontalAlignment="Stretch" Margin="0,0,230,0">
+            <DockPanel Margin="0,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Stretch" Width="810">
+                <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="QUẢN LÝ SÂN BAY"
+                           Margin="10,10,0,0"
+                           FontFamily="Times New Roman" FontWeight="Bold" FontSize="34"/>
+                <Button x:Name="btnAddAirport" 
+                            Style="{StaticResource MaterialDesignRaisedButton}"
+                            ToolTip="Resource name: MaterialDesignRaisedButton"
+                            Background="#7158e2" Width="180" Height="40"
+                            Margin="0,10,20,0" Click="BtnAddAirport_Click"
+                            VerticalAlignment="Center" HorizontalAlignment="Right"
+                            HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                    <DockPanel>
+                        <Canvas Width="50" Height="30">
+                            <materialDesign:PackIcon Kind="Airport" Foreground="White" Height="30" Width="30"/>
+                            <materialDesign:PackIcon Kind="Add" Foreground="White" Canvas.Left="30" RenderTransformOrigin="0.362,-0.046"/>
+                        </Canvas>
+
+                        <TextBlock Margin="5,0,0,0" Foreground="White" VerticalAlignment="Center"><Run Text="Thêm sân bay"/></TextBlock>
+                    </DockPanel>
+                </Button>
+            </DockPanel>
+
+
+            <DataGrid x:Name="dataSanBay" HorizontalAlignment="Stretch"
+                      CanUserSortColumns="True"
+                      CanUserAddRows="False" AutoGenerateColumns="False"
+                      Margin="10,80,10,10" VerticalAlignment="Stretch">
+                <DataGrid.Columns>
+                    <!-- Mã san6 bay -->
+                    <DataGridTextColumn Width="70"
+                                    Binding="{Binding MaSB}" Header="Mã sân bay" IsReadOnly="True"
+                                    EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
+
+                    <!-- Tên sân bay -->
+                    <DataGridTextColumn Width="*"
+                                    Binding="{Binding TenSB}" Header="Tên sân bay" IsReadOnly="True"
+                                    EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
+
+                    <!-- Địa điểm đặt sân bay -->
+                    <DataGridTextColumn Width="*"
+                                    Binding="{Binding DiaDiem}" Header="Địa điểm" IsReadOnly="True"
+                                    EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
+
+                    <!-- Button detail-->
+                    <DataGridTemplateColumn Width="60" Header="Xem" IsReadOnly="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>                                
+                                <Button x:Name="btnDetail"
+                                        Width="40" Background="Transparent" Foreground="Black"
+                                        FontSize="15" HorizontalContentAlignment="Left"
+                                        BorderThickness="0" HorizontalAlignment="Left"                                            
+                                        Click="BtnDetail_Click">
+                                    <materialDesign:PackIcon Kind="Eye" Margin="-10,0,0,0"/>
+                                </Button>                                                                    
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <!-- Button Edit-->
+                    <DataGridTemplateColumn Width="60" Header="Sữa" IsReadOnly="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button x:Name="btnEdit"
+                                        Width="40" Background="Transparent" Foreground="Black"
+                                        FontSize="15" HorizontalContentAlignment="Left"
+                                        BorderThickness="0" HorizontalAlignment="Left"                                            
+                                        Click="BtnEdit_Click">
+                                    <materialDesign:PackIcon Kind="Edit" Margin="-10,0,0,0"/>
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <!-- Button delete-->
+                    <DataGridTemplateColumn Width="60" Header="Xóa" IsReadOnly="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button x:Name="btnDelete"
+                                        Width="40" Background="Transparent" Foreground="Black"
+                                        FontSize="15" HorizontalContentAlignment="Left"
+                                        BorderThickness="0" HorizontalAlignment="Left"                                            
+                                        Click="BtnDelete_Click">
+                                    <materialDesign:PackIcon Kind="Bin" Margin="-10,0,0,0"/>
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+
+        <!--Menu-->
+        <Grid Margin="10,0,10,0" HorizontalAlignment="Right">
+            <StackPanel >
+                
+                <!--Search box-->
+                <TextBox x:Name="txtSearchBox" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Stretch"
+                            BorderThickness="0,0,0,2" Margin="0,30,0,0"
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                    <materialDesign:HintAssist.Hint>
+                        <StackPanel
+                                  Orientation="Horizontal"
+                                  Margin="-2 0 0 0">
+                            <materialDesign:PackIcon Kind="Search" Height="30" Width="30"/>
+                            <TextBlock>
+                                    Search Box
+                            </TextBlock>
+                        </StackPanel>
+                    </materialDesign:HintAssist.Hint>
+                </TextBox>
+                
+                <ComboBox x:Name="cmbFilter" Margin="10,10" FontSize="20"
+                      materialDesign:HintAssist.Hint="Filter"
+                      IsEditable="True"
+                      Style="{StaticResource MaterialDesignFloatingHintComboBox}">
+                    <ComboBoxItem IsSelected="True">
+                        Mã sân bay
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        Tên sân bay
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        Địa điểm
+                    </ComboBoxItem>
+                </ComboBox>
+
+                <Button x:Name="btnSearch" Background="OrangeRed" MaxWidth="260" Margin="0,10"
+                            Style="{StaticResource MaterialDesignRaisedButton}"
+                            Width="Auto" Height="Auto" Click="BtnSearch_Click"
+                            ToolTip="Resource name: MaterialDesignRaisedButton">
+                    <DockPanel>
+                        <materialDesign:PackIcon Kind="Search" Width="25" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" />
+                        <TextBlock FontSize="20" Foreground="White" Margin="10,0,0,0"> Search</TextBlock>
+                    </DockPanel>
+                </Button>
+
+                <Button x:Name="btnRefreshCancel" Background="#7158e2" MaxWidth="260" Margin="0,10"
+                            Style="{StaticResource MaterialDesignRaisedButton}"
+                            Width="Auto" Height="Auto" Click="BtnRefreshCancel_Click"
+                            ToolTip="Resource name: MaterialDesignRaisedButton">
+                    <DockPanel>
+                        <materialDesign:PackIcon Kind="Refresh" Width="25" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" />
+                        <TextBlock FontSize="20" Foreground="White" Margin="10,0,0,0"> Refresh/ Cancel</TextBlock>
+                    </DockPanel>
+                </Button>
+                
+                <Border CornerRadius="10"
+                            BorderBrush="#7158e2"
+                            BorderThickness="5"
+                            HorizontalAlignment="Left"
+                            Margin="0,20,0,0"
+                            Width="210" Height="120">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" Height="50"
+                           Content="Số sân bay" Foreground="Black" FontSize="25"
+                           VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+                        <Rectangle Grid.Row="1" Width="190" Height="5" Fill="#7158e2"/>
+                        <Label x:Name="lblSoSB" Grid.Row="2" Height="40"
+                           Content="50" Foreground="Black" FontSize="28"
+                           VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+                    </Grid>
+                </Border>
+            </StackPanel>
+        </Grid>
+
+        <myUC:addAirport x:Name="addAirportUC" Visibility="Collapsed"/>
+        <myUC:detailAirport x:Name="detailAirportUC" Visibility="Collapsed"/>
+    </Grid>
+</UserControl>

@@ -1,0 +1,218 @@
+﻿<UserControl x:Class="_1612018_1612175_PlaneTicketSelling.view.ruleMngUC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:_1612018_1612175_PlaneTicketSelling.view"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" Background="White"
+             d:DesignHeight="630" d:DesignWidth="1040">
+    <Grid>
+        <Label Margin="10,10,0,20" VerticalAlignment="Top" FontFamily="Times New Roman" FontSize="34" FontWeight="Bold" Content="QUẢN LÝ QUY ĐỊNH" ></Label>
+
+        <Grid  HorizontalAlignment="Stretch" Margin="0,40,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="0" Grid.Column="0" Margin="10,40,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Times New Roman" FontWeight="Bold" FontSize="34">
+                <TextBlock FontStyle="Italic">Quy định 1</TextBlock>
+            </Label>
+            <Grid Margin="10,65,0,0" HorizontalAlignment="Stretch" Grid.RowSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="310"></ColumnDefinition>
+                    <ColumnDefinition Width="200"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Label VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" Content="Thời gian bay tối thiểu:" FontSize="24" Grid.ColumnSpan="2" Height="41" Margin="0,32,190,31.8"></Label>
+                <Label VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" Content="Số lượng sân bay trung gian:" FontSize="24" Grid.ColumnSpan="2" Height="41" Margin="0,32.2,190,32.4"></Label>
+                <Label VerticalAlignment="Center" Grid.Row="2" Grid.Column="0" Content="Thời gian dừng tối thiểu:" FontSize="24" Grid.ColumnSpan="2" Height="42" Margin="0,31.6,190,31.2"></Label>
+                <Label VerticalAlignment="Center" Grid.Row="3" Grid.Column="0" Content="Thời gian dừng tối đa:" FontSize="24" Grid.ColumnSpan="2" Height="42" Margin="0,31.8,190,31.8"></Label>
+
+
+                <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="0" Margin="0">
+                    <Label x:Name="rule1_2" Grid.Row="0" Grid.Column="1" Content="1" 
+                       FontSize="24" Width="52"
+                       VerticalAlignment="Center"
+                       HorizontalContentAlignment="Left" VerticalContentAlignment="Center"></Label>
+                    <StackPanel
+                            VerticalAlignment="Center" HorizontalAlignment="Right">
+                        <Button Click="btnIncrease1_2Click" x:Name="increase1_2" BorderThickness="2" BorderBrush="Black" >
+                            <materialDesign:PackIcon Kind="ChevronUp"></materialDesign:PackIcon>
+                        </Button>
+                        <Button Click="btnDecrease1_2Click" x:Name="decrease1_2" BorderThickness="2" BorderBrush="Black">
+                            <materialDesign:PackIcon Kind="ChevronDown"></materialDesign:PackIcon>
+                        </Button>
+                    </StackPanel>
+                    <Label Grid.Row="0" Grid.Column="1" Content="phút" 
+                       FontSize="24" Width="70"
+                       VerticalAlignment="Center"
+                       HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Margin="10,0,0,0"></Label>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="1" Margin="0">
+                    <Label x:Name="rule1_3" Grid.Row="0" Grid.Column="1" Content="1" 
+                       FontSize="24" Width="52"
+                       VerticalAlignment="Center"
+                       HorizontalContentAlignment="Left" VerticalContentAlignment="Center"></Label>
+                    <StackPanel
+                            VerticalAlignment="Center" HorizontalAlignment="Right">
+                        <Button Click="btnIncrease1_3Click" x:Name="increase1_3" BorderThickness="2" BorderBrush="Black" >
+                            <materialDesign:PackIcon Kind="ChevronUp"></materialDesign:PackIcon>
+                        </Button>
+                        <Button Click="btnDecrease1_3Click" x:Name="decrease1_3" BorderThickness="2" BorderBrush="Black">
+                            <materialDesign:PackIcon Kind="ChevronDown"></materialDesign:PackIcon>
+                        </Button>
+                    </StackPanel>
+                    <Label Grid.Row="0" Grid.Column="1" Content="sân" 
+                       FontSize="24" Width="70"
+                       VerticalAlignment="Center"
+                       HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Margin="10,0,0,0"></Label>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="2" Margin="0">
+                    <Label x:Name="rule1_4" Grid.Row="0" Grid.Column="1" Content="30" 
+                       FontSize="24" Width="52"
+                       VerticalAlignment="Center"
+                       HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Margin="0"></Label>
+                    <StackPanel
+                            VerticalAlignment="Center" HorizontalAlignment="Right">
+                        <Button Click="btnIncrease1_4Click" x:Name="increase1_4" BorderThickness="2" BorderBrush="Black" >
+                            <materialDesign:PackIcon Kind="ChevronUp"></materialDesign:PackIcon>
+                        </Button>
+                        <Button Click="btnDecrease1_4Click" x:Name="decrease1_4" BorderThickness="2" BorderBrush="Black">
+                            <materialDesign:PackIcon Kind="ChevronDown"></materialDesign:PackIcon>
+                        </Button>
+                    </StackPanel>
+                    <Label Grid.Row="0" Grid.Column="1" Content="phút" 
+                       FontSize="24" Width="70"
+                       VerticalAlignment="Center"
+                       HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Margin="10,0,0,0"></Label>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="3" Margin="0">
+                    <Label x:Name="rule1_5" Grid.Row="0" Grid.Column="1" Content="1" 
+                       FontSize="24" Width="52"
+                       VerticalAlignment="Center"
+                       HorizontalContentAlignment="Left" VerticalContentAlignment="Center"></Label>
+                    <StackPanel
+                            VerticalAlignment="Center" HorizontalAlignment="Left">
+                        <Button Click="btnIncrease1_5Click" x:Name="increase1_5" BorderThickness="2" BorderBrush="Black" >
+                            <materialDesign:PackIcon Kind="ChevronUp"></materialDesign:PackIcon>
+                        </Button>
+                        <Button Click="btnDecrease1_5Click" x:Name="decrease1_5" BorderThickness="2" BorderBrush="Black">
+                            <materialDesign:PackIcon Kind="ChevronDown"></materialDesign:PackIcon>
+                        </Button>
+                    </StackPanel>
+                    <Label Grid.Row="0" Grid.Column="1" Content="phút" 
+                       FontSize="24" Width="70"
+                       VerticalAlignment="Center"
+                       HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Margin="10,0,0,0"></Label>
+                </StackPanel>
+
+
+
+            </Grid>
+
+            <Grid Grid.Column="1" Grid.Row="0" Margin="20,0,0,240" Grid.RowSpan="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Margin="10,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontFamily="Times New Roman" FontWeight="Bold" FontSize="34">
+                    <TextBlock FontStyle="Italic">Quy định 2</TextBlock>
+                </Label>
+
+                <Label Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="24">
+                    <TextBlock TextDecorations="underline">Vé thường:</TextBlock>
+                </Label>
+                <StackPanel Orientation="Horizontal" Grid.Row="2">
+
+                    <Label Margin="20,0,0,0" VerticalAlignment="Center" FontSize="24">Đơn giá:</Label>
+                    <TextBox Text="100.0" x:Name="normalSeatTxt" BorderThickness="3" BorderBrush="Black" Margin="20,0,40,0" 
+                             VerticalAlignment="Center" materialDesign:HintAssist.Hint="100.0" IsEnabled="True" FontSize="24"
+                             PreviewTextInput="normalSeatTxt_PreviewTextInput"/>
+                    <Label VerticalAlignment="Center" FontSize="24">$</Label>
+                </StackPanel>
+
+                <Label Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="24">
+                    <TextBlock TextDecorations="underline">Vé đặc biệt:</TextBlock>
+                </Label>
+                <StackPanel Orientation="Horizontal" Grid.Row="4">
+                    <Label Margin="20,0,0,0" VerticalAlignment="Center" FontSize="24">Đơn giá:</Label>
+                    <TextBox Text="100.0" x:Name="vipSeatTxt" BorderThickness="3" BorderBrush="Black" Margin="20,0,40,0" 
+                             VerticalAlignment="Center" materialDesign:HintAssist.Hint="100.0" IsEnabled="True" FontSize="24"
+                             PreviewTextInput="vipSeatTxt_PreviewTextInput"/>
+                    <Label VerticalAlignment="Center" FontSize="24">$</Label>
+                </StackPanel>
+
+            </Grid>
+            <Grid Margin="20,55,0,0" Grid.Column="1" Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Margin="10,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontFamily="Times New Roman" FontWeight="Bold" FontSize="34">
+                    <TextBlock FontStyle="Italic">Quy định 3</TextBlock>
+                </Label>
+                <StackPanel Orientation="Horizontal" Grid.Row="1" Visibility="Collapsed">
+                    <Label VerticalAlignment="Center" FontSize="24">Thời gian đặt vé, trước:</Label>
+                    <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
+                        <Label x:Name="rule3_1" Grid.Row="0" Grid.Column="1" Content="1" 
+                       FontSize="24" Width="52"
+                       VerticalAlignment="Center"
+                       HorizontalContentAlignment="Left" VerticalContentAlignment="Center"></Label>
+                        <StackPanel
+                            VerticalAlignment="Center" HorizontalAlignment="Right">
+                            <Button Click="btnIncrease3_1Click" x:Name="increase3_1" BorderThickness="2" BorderBrush="Black" >
+                                <materialDesign:PackIcon Kind="ChevronUp"></materialDesign:PackIcon>
+                            </Button>
+                            <Button Click="btnDecrease3_1Click" x:Name="decrease3_1" BorderThickness="2" BorderBrush="Black">
+                                <materialDesign:PackIcon Kind="ChevronDown"></materialDesign:PackIcon>
+                            </Button>
+                        </StackPanel>
+                        <Label Margin="10,0,0,0"  FontSize="24" VerticalAlignment="Center">ngày</Label>
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Grid.Row="1">
+                    <Label VerticalAlignment="Center" FontSize="24">Thời gian hủy vé, trước:</Label>
+                    <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
+                        <Label x:Name="rule3_2" Grid.Row="0" Grid.Column="1" Content="1" 
+                       FontSize="24" Width="52"
+                       VerticalAlignment="Center"
+                       HorizontalContentAlignment="Left" VerticalContentAlignment="Center"></Label>
+                        <StackPanel
+                            VerticalAlignment="Center" HorizontalAlignment="Right">
+                            <Button Click="btnIncrease3_2Click" x:Name="increase3_2" BorderThickness="2" BorderBrush="Black" >
+                                <materialDesign:PackIcon Kind="ChevronUp"></materialDesign:PackIcon>
+                            </Button>
+                            <Button Click="btnDecrease3_2Click" x:Name="decrease3_2" BorderThickness="2" BorderBrush="Black">
+                                <materialDesign:PackIcon Kind="ChevronDown"></materialDesign:PackIcon>
+                            </Button>
+                        </StackPanel>
+                        <Label Margin="10,0,0,0"  FontSize="24" VerticalAlignment="Center">ngày</Label>
+                    </StackPanel>
+                </StackPanel>
+                <Button Margin="10,10,30,10" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="24" Width="100" Height="50"
+                Style="{StaticResource MaterialDesignRaisedDarkButton}" Grid.Row="2" x:Name="btnSave"
+                ToolTip="Resource name: MaterialDesignRaisedLightDarkButton"
+                Background="ForestGreen" Foreground="White" VerticalContentAlignment="Center" Click="btnSaveClick">Save</Button>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

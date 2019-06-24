@@ -1,0 +1,66 @@
+﻿<Window x:Class="_1612018_1612175_PlaneTicketSelling.view.addNote"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:_1612018_1612175_PlaneTicketSelling.view"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        MaxHeight="300" MaxWidth="400" WindowStyle="None" WindowStartupLocation="CenterOwner"
+        d:DesignHeight="300" d:DesignWidth="400">
+    <Grid>
+        <Label Content="GHI CHÚ" FontFamily="Arial Black"
+               FontSize="25" HorizontalAlignment="Center" Margin="0,10,0,0"/>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="170"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBox x:Name="NoteContent"  Grid.Row="0"                    
+                    AcceptsReturn="True"
+                    Margin="15,60,15,0"
+                     Padding="5"
+                     BorderThickness="1" BorderBrush="Black"                                  
+                    VerticalAlignment="Top"
+                    Height="100"                
+                    TextWrapping="Wrap"
+                    VerticalScrollBarVisibility="Auto"
+                    materialDesign:HintAssist.Hint="Ghi chú ..."/>
+
+            <!--Thời lượng chuyến bay-->
+            <StackPanel Orientation="Horizontal" Grid.Row="1"
+                        VerticalAlignment="Top"
+                        HorizontalAlignment="Stretch">
+                <Label FontWeight="Bold" VerticalAlignment="Center" Margin="10,0,0,0"
+                               FontSize="20"
+                               Content="Thời lượng dừng:"/>
+                <TextBox VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="20,0,0,0"
+                                  x:Name="txtHrs" Width="50" FontSize="20"
+                                  materialDesign:HintAssist.Hint="Giờ">
+                </TextBox>
+                <Label FontWeight="Bold" VerticalAlignment="Center" Margin="0,0,10,0"
+                               FontSize="20"
+                               Content="h"/>
+                <TextBox VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="20,0,0,0"
+                                  x:Name="txtMins" Width="50" FontSize="20"
+                                  materialDesign:HintAssist.Hint="Phút">
+                </TextBox>
+                <Label FontWeight="Bold" VerticalAlignment="Center" Margin="0,0,10,0"
+                               FontSize="20"
+                               Content="p"/>
+            </StackPanel>
+        </Grid>
+
+        <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Bottom"
+                   Margin="0,0,0,20">
+            <Button x:Name="btnCancel" Content="CANCEL" Background="#7158e2"
+                    Width="150" Height="40"
+                    Foreground="White" Click="BtnCancel_Click"
+                    Margin="0,0,50,0"/>
+            <Button x:Name="btnOK" Content="OK" Background="OrangeRed"
+                    Width="100" Height="40"
+                    Foreground="White" Click="BtnOK_Click"
+                    Margin="20,0,0,0"/>            
+        </WrapPanel>
+    </Grid>
+</Window>
